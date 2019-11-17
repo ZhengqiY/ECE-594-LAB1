@@ -127,6 +127,15 @@ def ori_call(command, line_index):
     call_str = conv_2_hex(call_str)
     return call_str
 
+def andi_call(command, line_index):
+    imm = conv_2_bin(12, int(command[3]))
+    rd = conv_2_bin(5, registers.index(command[1]))
+    rs1 = conv_2_bin(5, registers.index(command[2]))
+    
+    call_str = imm + rs1 + '111' + rd + '0010011'
+    call_str = conv_2_hex(call_str)
+    return call_str
+
 def slt_call(command, line_index):
     rd = conv_2_bin(5, registers.index(command[1]))
     rs1 = conv_2_bin(5, registers.index(command[2]))
@@ -226,6 +235,7 @@ if __name__ == '__main__':
         'jal': jal_call,
         'jr': jr_call,
         'beq': beq_call,
+        'andi':andi_call,
     }
 
     machine_code = []
